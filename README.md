@@ -3,16 +3,11 @@
 参考「 深蓝洞察 」的文章：https://mp.weixin.qq.com/s/P_EYQxOEupqdU0BJMRqWsw
 （Bundle 风水 - Android Parcel 序列化与反序列化不匹配系列漏洞，实现 0day/Nday 攻击，从而绕过系统校验，获取系统级 StartAnyWhere 能力）
 
-![image](https://user-images.githubusercontent.com/16593068/223938152-ace2a6a9-19b3-43d4-b409-b98c34cdd185.png)
-![image](https://user-images.githubusercontent.com/16593068/223938640-bae98d84-8365-456f-b6df-5dd5b373ea59.png)
 
-
-复现流程如下：  
+## 复现流程如下：  
 
 下载3月5日前更新的（6.50版本前）的拼多多apk，如6.49版本：  
 https://com-xunmeng-pinduoduo.en.uptodown.com/android/download/91472728  
-
-
 
 
 
