@@ -3,14 +3,218 @@
 参考「 深蓝洞察 」的文章：https://mp.weixin.qq.com/s/P_EYQxOEupqdU0BJMRqWsw
 （Bundle 风水 - Android Parcel 序列化与反序列化不匹配系列漏洞，实现 0day/Nday 攻击，从而绕过系统校验，获取系统级 StartAnyWhere 能力）
 
+![image](https://user-images.githubusercontent.com/16593068/223938152-ace2a6a9-19b3-43d4-b409-b98c34cdd185.png)
+![image](https://user-images.githubusercontent.com/16593068/223938640-bae98d84-8365-456f-b6df-5dd5b373ea59.png)
+
 
 复现流程如下：  
+
 下载3月5日前更新的（6.50版本前）的拼多多apk，如6.49版本：  
 https://com-xunmeng-pinduoduo.en.uptodown.com/android/download/91472728  
 
+
+
+
+
+## 拼多多-V6.49.0.apk 
+
+https://com-xunmeng-pinduoduo.en.uptodown.com/android/download/91472728
+
+![](https://pora-images-1251578175.cos.ap-shanghai.myqcloud.com/images/2023/03/09/9c4cc494b9abaf75addb210198f7e704-253ffd80c9.png)
+
+| 标题         | 值                                                           |
+| ------------ | ------------------------------------------------------------ |
+| Author       | 上海寻梦信息技术有限公司                                     |
+| SHA256       | ddaf85e8e86cf08a423629e9cd9ff59b42fd98d7b4dda74d09690544f0bccf35 |
+| Package Name | com.xunmeng.pinduoduo                                        |
+| Date         | Feb 23th, 2023                                               |
+| Size         | 27.28 MB                                                     |
+| Downloads    | 173,690                                                      |
+| Permissions  | 87                                                           |
+| Language     | English                                                      |
+| Op. System   | Android                                                      |
+| Category     | [Shopping](https://en.uptodown.com/android/shopping)         |
+| Requirements | Android 4.0.3, 4.0.4 or higher required                      |
+| Architecture | armeabi-v7a                                                  |
+
+## 拼多多-V6.50.0.apk 
+
+https://com-xunmeng-pinduoduo.en.uptodown.com/android/download/91472728
+
+![image](https://user-images.githubusercontent.com/16593068/223938640-bae98d84-8365-456f-b6df-5dd5b373ea59.png)
+
+| 标题         | 值                                                           |
+| ------------ | ------------------------------------------------------------ |
+| Author       | 上海寻梦信息技术有限公司                                     |
+| SHA256       | 93958586e0b49515a4393b768ebafc597c5eb6e253b287032e4304b6f4334f98 |
+| Package Name | com.xunmeng.pinduoduo                                        |
+| Date         | Mar 5th, 2023                                                |
+| Size         | 27.11 MB                                                     |
+| Downloads    | 173,690                                                      |
+| Permissions  | 87                                                           |
+| Language     | English                                                      |
+| Op. System   | Android                                                      |
+| Category     | [Shopping](https://en.uptodown.com/android/shopping)         |
+| Requirements | Android 4.0.3, 4.0.4 or higher required                      |
+| Architecture | armeabi-v7a                                                  |
+
+
+
+### virustotal download for 拼多多-V6.49.0.apk 
+
+https://www.virustotal.com/gui/file/ddaf85e8e86cf08a423629e9cd9ff59b42fd98d7b4dda74d09690544f0bccf35/details
+
+## apktool
+
+https://ibotpeaches.github.io/Apktool/
+
+```
+>java -jar apktool_2.7.0.jar d 拼多多-V6.49.0.apk
+I: Using Apktool 2.7.0 on 拼多多-V6.49.0.apk
+I: Loading resource table...
+I: Decoding AndroidManifest.xml with resources...
+I: Loading resource table from file: C:\Users\admin\AppData\Local\apktool\framework\1.apk
+I: Regular manifest package...
+I: Decoding file-resources...
+I: Decoding values */* XMLs...
+I: Baksmaling classes.dex...
+I: Baksmaling classes2.dex...
+I: Baksmaling classes3.dex...
+I: Baksmaling classes4.dex...
+I: Baksmaling classes5.dex...
+I: Baksmaling classes6.dex...
+I: Copying assets and libs...
+I: Copying unknown files...
+I: Copying original files...
+I: Copying META-INF/services directory
+```
+
+## 拼多多-V6.49.0.apk VS 拼多多-V6.50.0.apk
+
+![image](https://user-images.githubusercontent.com/16593068/223938152-ace2a6a9-19b3-43d4-b409-b98c34cdd185.png)
+
+![](https://pora-images-1251578175.cos.ap-shanghai.myqcloud.com/images/2023/03/09/5a644d55650e8e6f489f6c41f6fa19e5-3c94b26726.png)
+
+解压缩
+
+![](https://pora-images-1251578175.cos.ap-shanghai.myqcloud.com/images/2023/03/09/2379dd74b948b5298040cea2d9c85fc4-1a8366022b.png)
+
+```bash
+> root@ubuntu1804# ls /tmp/pdd 
+com.xunmeng.pinduoduo.AliveBaseAbility.7z
+
+> root@ubuntu1804# 7z x com.xunmeng.pinduoduo.AliveBaseAbility.7z
+Scanning the drive for archives:
+1 file, 144086 bytes (141 KiB)
+Extracting archive: com.xunmeng.pinduoduo.AliveBaseAbility.7z
+WARNING:
+com.xunmeng.pinduoduo.AliveBaseAbility.7z
+Can not open the file as [7z] archive
+The file is open as [lzma] archive
+--
+Path = com.xunmeng.pinduoduo.AliveBaseAbility.7z
+Open WARNING: Can not open the file as [7z] archive
+Type = lzma
+Everything is Ok                             
+Archives with Warnings: 1
+Size:       497152
+Compressed: 144086
+
+> root@ubuntu1804# ls /tmp/pdd 
+
+com.xunmeng.pinduoduo.AliveBaseAbility  com.xunmeng.pinduoduo.AliveBaseAbility.7z
+
+> root@ubuntu1804# mkdir /tmp/pdd/AliveBaseAbility   
+
+> root@ubuntu1804# tar -xvf com.xunmeng.pinduoduo.AliveBaseAbility -C AliveBaseAbility
+com.xunmeng.pinduoduo.AliveBaseAbility.md5checker
+assets/json.config
+vmp_src/mw1.bin
+com.xunmeng.pinduoduo.AliveBaseAbility.manifest
+
+> root@ubuntu1804# ls /tmp/pdd 
+AliveBaseAbility  com.xunmeng.pinduoduo.AliveBaseAbility  com.xunmeng.pinduoduo.AliveBaseAbility.7z
+
+> root@ubuntu1804# cd  /tmp/pdd/AliveBaseAbility
+
+> root@ubuntu1804# ls /tmp/pdd/AliveBaseAbility 
+assets  com.xunmeng.pinduoduo.AliveBaseAbility.manifest  com.xunmeng.pinduoduo.AliveBaseAbility.md5checker  vmp_src
+
+> root@ubuntu1804# tree /tmp/pdd/AliveBaseAbility
+.
+├── assets
+│   └── json.config
+├── com.xunmeng.pinduoduo.AliveBaseAbility.manifest
+├── com.xunmeng.pinduoduo.AliveBaseAbility.md5checker
+└── vmp_src
+    └── mw1.bin
+2 directories, 4 files
+```
+
+![](https://pora-images-1251578175.cos.ap-shanghai.myqcloud.com/images/2023/03/09/a60a76bacba20de7f983e053a54cdb2c-927cfebafe.png)
+
+### AliveBaseAbility/com.xunmeng.pinduoduo.AliveBaseAbility.manifest
+
+```python
+PDD_MANIFEST
+VERSION: 1.0.0
+KEEP:
+assets/
+vmp_src/
+assets/json.config
+vmp_src/mw1.bin
+com.xunmeng.pinduoduo.AliveBaseAbility.md5checker
+```
+
+### AliveBaseAbility/com.xunmeng.pinduoduo.AliveBaseAbility.md5checker
+
+```json
+{
+  "component_id": "com.xunmeng.pinduoduo.AliveBaseAbility",
+  "version": "1.0.0",
+  "md5_list": {
+    "vmp_src/mw1.bin": {
+      "length": 492328,
+      "md5": "569d110753d56aec16b81f8394c5b2d8"
+    },
+    "assets/json.config": {
+      "length": 265,
+      "md5": "1939acdf6e35fb9ec4cd0b1192f5993b"
+    },
+    "com.xunmeng.pinduoduo.AliveBaseAbility.manifest": {
+      "length": 136,
+      "md5": "44545e6bfaba72bfa7b1cd2a4c3a0e73"
+    }
+  }
+}
+```
+
+### AliveBaseAbility/assets/json.config
+
+```json
+{
+  "file_desc": {
+    "vmp_src/mw1.bin": {
+      "length": 492328,
+      "md5": "569D110753D56AEC16B81F8394C5B2D8"
+    }
+  },
+  "name": "alive_base_ability_plugin",
+  "min_sdk_ver": "6.1.0",
+  "md5_desc": {
+    "vmp_src/mw1.bin": {
+      "length": 492328,
+      "md5": "569D110753D56AEC16B81F8394C5B2D8"
+    }
+  },
+  "plugin_sdk_ver": "6.49.7"
+}
+```
+
+`AliveBaseAbility/vmp_src/mw1.bin`
+
 解压apk文件，找到拼多多apk中，提权代码所在的文件位置：  
 pinduoduo-6-49-0.zip\assets\component\com.xunmeng.pinduoduo.AliveBaseAbility.7z\com.xunmeng.pinduoduo.AliveBaseAbility\vmp_src\mw1.bin
-
 以上是一个加VMP壳的dex文件，脱壳还原出代码，可以找到针对不同手机厂商系统的多个用于提权的漏洞利用代码，胆子相当的大，比如利用三星手机“com.samsung.android.cepproxyks.CertByte”的提权漏洞，代码如下：
 
 
