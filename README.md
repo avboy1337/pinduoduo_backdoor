@@ -208,6 +208,21 @@ com.xunmeng.pinduoduo.AliveBaseAbility.md5checker
 
 `AliveBaseAbility/vmp_src/mw1.bin`
 
+
+```
+# hexdump -C mw1.bin|head -n 10
+00000000  1a 0c 06 05 03 00 14 00  37 96 76 e6 16 47 57 27  |........7.v..GW'|
+00000010  56 f5 07 57 26 c6 96 36  f5 b6 56 97 a2 00 30 81  |V..W&..6..V...0.|
+00000020  9f 30 0d 06 09 2a 86 48  86 f7 0d 01 01 01 05 00  |.0...*.H........|
+00000030  03 81 8d 00 30 81 89 02  81 81 00 9d d9 4c cc eb  |....0........L..|
+00000040  68 69 91 af 73 65 ed fa  b1 76 67 08 54 b1 52 c3  |hi..se...vg.T.R.|
+00000050  54 a5 ef 38 00 39 33 90  9a 0c 60 72 8f 81 dc df  |T..8.93...`r....|
+00000060  37 d1 fd 29 43 a3 fd f2  1b 2d b3 b2 aa 88 84 3f  |7..)C....-.....?|
+00000070  cd 3c 20 79 6c 04 a3 8e  f7 06 fd ce b0 40 fa 02  |.< yl........@..|
+00000080  9c 39 35 e3 9b 70 4e e6  bc e1 8f bc d0 ce 35 bd  |.95..pN.......5.|
+00000090  61 12 20 38 77 7d 4f c9  9a 91 b6 22 5f 2d 7f ee  |a. 8w}O...."_-..|
+```
+
 解压apk文件，找到拼多多apk中，提权代码所在的文件位置：  
 pinduoduo-6-49-0.zip\assets\component\com.xunmeng.pinduoduo.AliveBaseAbility.7z\com.xunmeng.pinduoduo.AliveBaseAbility\vmp_src\mw1.bin
 以上是一个加VMP壳的dex文件，脱壳还原出代码，可以找到针对不同手机厂商系统的多个用于提权的漏洞利用代码，胆子相当的大，比如利用三星手机“com.samsung.android.cepproxyks.CertByte”的提权漏洞，代码如下：
