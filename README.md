@@ -63,7 +63,7 @@ https://www.virustotal.com/gui/file/ddaf85e8e86cf08a423629e9cd9ff59b42fd98d7b4dd
 
 https://ibotpeaches.github.io/Apktool/
 
-```
+```bash
 >java -jar apktool_2.7.0.jar d 拼多多-V6.49.0.apk
 I: Using Apktool 2.7.0 on 拼多多-V6.49.0.apk
 I: Loading resource table...
@@ -209,7 +209,7 @@ com.xunmeng.pinduoduo.AliveBaseAbility.md5checker
 `AliveBaseAbility/vmp_src/mw1.bin`
 
 
-```
+```bash
 # hexdump -C mw1.bin|head -n 10
 00000000  1a 0c 06 05 03 00 14 00  37 96 76 e6 16 47 57 27  |........7.v..GW'|
 00000010  56 f5 07 57 26 c6 96 36  f5 b6 56 97 a2 00 30 81  |V..W&..6..V...0.|
@@ -228,7 +228,7 @@ pinduoduo-6-49-0.zip\assets\component\com.xunmeng.pinduoduo.AliveBaseAbility.7z\
 以上是一个加VMP壳的dex文件，脱壳还原出代码，可以找到针对不同手机厂商系统的多个用于提权的漏洞利用代码，胆子相当的大，比如利用三星手机“com.samsung.android.cepproxyks.CertByte”的提权漏洞，代码如下：
 
 
- ```
+ ```java
 // assets/component/com.xunmeng.pinduoduo.AliveBaseAbilitiy
 // [Manwei]
 // com/xunmeng/pinduoduo/android_pull_ablity_comp/pullstartup/SamsungAlivePullStartup 
